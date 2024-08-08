@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HistoricalFilesController } from './historical-files.controller';
-import { HistoricalFilesService } from '../domain/historical-files.service';
+import { HistoricalFilesService } from '../../domain/services/historical-files.service';
 
 describe('HistoricalFilesController', () => {
   let target: HistoricalFilesController;
