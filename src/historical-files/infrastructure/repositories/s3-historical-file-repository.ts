@@ -30,11 +30,12 @@ export class S3HistoricalFileRepository implements HistoricalFileRepository {
         }
     }
 
-    async findAll(rootBucket: DriveKey, path: string = ''): Promise<BucketContent> {
+    async findAll(rootBucket: DriveKey, path: string): Promise<BucketContent> {
         try {
-            const params = this.createParams(rootBucket, path)
-
-            return this.hydrateBucketContent.apply(await this.s3.listObjectsV2(params).promise(), path)
+            return this.hydrateBucketContent.apply(
+                await this.s3.listObjectsV2(this.createParams(rootBucket, path))
+                    .promise(),
+                path)
         } catch (error) {
             console.error('Error fetching S3 objects:', error);
             throw new Error(`Access Denied: ${error.message}`);
@@ -44,8 +45,8 @@ export class S3HistoricalFileRepository implements HistoricalFileRepository {
     createParams(rootBucket: DriveKey, path: string) {
         return {
             Bucket: this.s3MappedDrives[rootBucket],
-            Prefix: path, 
-            Delimiter: '/', 
+            Prefix: path,
+            Delimiter: '/',
         };
     }
 
