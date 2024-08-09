@@ -26,6 +26,8 @@ export class HydrateBucketContent {
             .filter(file => file.Key !== path)
             .map(file  => ({
                 key: file.Key,
+                size: file.Size,
+                restoreStatus: file.RestoreStatus,
                 lastModified: file.LastModified,
                 owner: file.Owner?.DisplayName || '', // Get the owner's display name if available
             })) || [];

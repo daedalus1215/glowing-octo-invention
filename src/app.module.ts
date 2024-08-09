@@ -24,7 +24,7 @@ import { File } from './historical-files/domain/entities/file.entity';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [File],
-        synchronize: true, // Set to false in production
+        synchronize: configService.get<boolean>('DB_SYNCHRONIZE'), // Set to false in production
       }),
     }),
     TypeOrmModule.forFeature([File]), 
