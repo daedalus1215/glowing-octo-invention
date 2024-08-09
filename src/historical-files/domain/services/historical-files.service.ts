@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { S3HistoricalFileRepository } from '../../infrastructure/repositories/s3-historical-file-repository';
+import { S3HistoricalFileDAO } from '../../infrastructure/daos/s3-historical-file-dao';
 import { DriveKey } from '../../types';
 import { FindAllHistoricalFiles } from '../transactionScripts/find-all-historical-files.transaction.script';
 

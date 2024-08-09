@@ -7,7 +7,7 @@ import { HydrateBucketContent } from "../hydrators/hydrate-bucket-content";
 
 
 @Injectable()
-export class S3HistoricalFileRepository implements HistoricalFileRepository {
+export class S3HistoricalFileDAO implements HistoricalFileRepository {
     private s3: AWS.S3;
     private s3MappedDrives: {
         R: ''
