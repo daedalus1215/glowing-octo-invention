@@ -5,16 +5,21 @@ import { S3HistoricalFileDAO } from './infrastructure/daos/s3-historical-file-da
 import { ConfigModule } from '@nestjs/config';
 import { FindAllHistoricalFiles } from './domain/transactionScripts/find-all-historical-files.transaction.script';
 import { HydrateBucketContent } from './infrastructure/hydrators/hydrate-bucket-content';
+import { LoadFilesFromHistoricalFiles } from './domain/transactionScripts/load-files-from-historical-files.transaction.scripts';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { File } from './domain/entities/file.entity';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [ConfigModule.forRoot(), TypeOrmModule.forFeature([File])],
   controllers: [HistoricalFilesController],
   providers: [
     HistoricalFilesService,
-    FindAllHistoricalFiles,
     HydrateBucketContent,
+    // TS
+    FindAllHistoricalFiles,
+    LoadFilesFromHistoricalFiles,
     {
-      provide: 'HistoricalFileRepository',  
+      provide: 'HistoricalFileRepository',
       useClass: S3HistoricalFileDAO
     }
   ]

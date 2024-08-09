@@ -50,4 +50,8 @@ export class S3HistoricalFileDAO implements HistoricalFileRepository {
         };
     }
 
+    async listAllBuckets(): Promise<AWS.S3.Bucket[]> {
+        const result = await this.s3.listBuckets().promise();
+        return result.Buckets;
+    }
 }
